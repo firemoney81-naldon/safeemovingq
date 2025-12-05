@@ -1,23 +1,633 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "이사비용 산정 및 이사 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "이사비 전문가 그룹",
+        "url": "https://yourdomain.com",
+        "logo": "https://yourdomain.com/logo.png"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "대한민국"
+      },
+      "description": "2026년 최신 이사비용 트렌드를 반영한 포장이사, 반포장이사, 일반 이사 서비스를 전국적으로 제공합니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "이사 서비스 가격 가이드",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "2026 포장이사비용"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "500000",
+              "priceCurrency": "KRW",
+              "description": "이사비 최고급 서비스. 포장, 운반, 정리 정돈까지 포함된 2026년 기준 포장이사비."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "2026 반포장이사비용"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            background-color: #f8f9fa; /* 밝고 부드러운 배경색 */
+            color: #343a40;
+        }
+        header {
+            background-color: #1abc9c; /* 메인 색상: 민트 계열 */
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -1.5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c3e50; /* 다크 블루 */
+            font-size: 2rem;
+            margin-top: 2.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 4px solid #1abc9c;
+            display: block;
+            text-align: left;
+            font-weight: 700;
+        }
+        h3 {
+            color: #34495e;
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            border-left: 5px solid #3498db;
+            padding-left: 10px;
+            font-weight: 700;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            font-size: 1.1rem;
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        main {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        section {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+        }
+        section p, section ul, section dl, section dd {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            text-align: justify;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        th, td {
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1rem;
+            border: 1px solid #e9ecef;
+        }
+        th {
+            background-color: #3498db; /* 파란색 계열 */
+            color: white;
+            font-weight: 700;
+        }
+        tr:nth-child(even) {
+            background-color: #f4f6f9;
+        }
+        .price-highlight {
+            font-weight: 700;
+            color: #e74c3c; /* 강조 색상: 빨간색 계열 */
+            font-size: 1.3rem;
+        }
+        .cta-button {
+            display: block;
+            width: 80%;
+            max-width: 400px;
+            margin: 2.5rem auto 1rem auto;
+            background-color: #e74c3c; /* 강조 색상 */
+            color: white;
+            font-weight: 700;
+            padding: 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 1.2rem;
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+        }
+        .cta-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-5px);
+        }
+        .keyword-tags {
+            margin: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-top: 1px dashed #ccc;
+            padding-top: 1.5rem;
+        }
+        .keyword-tags a {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            border: 1px solid #bdc3c7;
+        }
+        .keyword-tags a:hover {
+            background-color: #bdc3c7;
+        }
+        .external-links ul, .check-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .external-links li, .check-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        .external-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .external-links a:hover {
+            text-decoration: underline;
+        }
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #2ecc71; /* 녹색 */
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        dt {
+            font-weight: 700;
+            color: #2c3e50;
+            cursor: pointer;
+            padding: 15px;
+            margin-top: 10px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            border-left: 5px solid #1abc9c;
+        }
+        dt:hover {
+            background-color: #dce1e7;
+        }
+        dd {
+            margin-left: 0;
+            padding: 15px;
+            border-left: 3px solid #ccc;
+            display: none; /* 초기 상태 숨김 */
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+        dt[aria-expanded="true"] + dd {
+            display: block;
+        }
+        .simulation-form input, .simulation-form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+        .simulation-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .simulation-form button {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+        .simulation-form button:hover {
+            background-color: #2980b9;
+        }
+        #simulationResult {
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px solid #e74c3c;
+            background-color: #fdedec;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        .graph-placeholder {
+            height: 300px;
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .hidden-seo-text {
+            /* 시각적으로 숨기지만 SEO를 위해 유지 */
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            font-size: 0.95rem;
+            color: #888;
+            background-color: #ecf0f1;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>✅ 2026년 이사비용 완벽 분석 및 최적화 가이드</h1>
+        <p>합리적인 **이사비** 산정부터 예약까지, 전문가의 노하우를 지금 확인하세요.</p>
+        <nav>
+            <ul>
+                <li><a href="#guide">이사비 가이드</a></li>
+                <li><a href="#price_trend">2026년 이사비 트렌드</a></li>
+                <li><a href="#regions">전국 주요 지역 이사비</a></li>
+                <li><a href="#contact">무료 견적 문의</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section id="guide">
+            <h2>💰 이사비 산정의 기본 원칙과 핵심 요소 이해하기</h2>
+            <p>
+                <strong>이사비</strong>는 단순히 짐을 옮기는 데 드는 비용 그 이상입니다. 이는 서비스의 질, 안전성, 그리고 고객 만족도를 포괄하는 총체적인 가치입니다. 많은 분들이 **포장이사비용**이나 **반포장이사비용**을 궁금해하시지만, 정확한 **이사비**를 산출하기 위해서는 몇 가지 핵심 요소를 면밀히 검토해야 합니다. 이사 서비스를 계획할 때 가장 먼저 고려해야 할 것은 이사 형태(포장/반포장/일반)와 짐의 양(톤수)입니다. 예를 들어, 1인 가구는 1톤 또는 2.5톤 차량이 적합하며, **2.5톤이사비용**은 짐의 양과 작업 난이도에 따라 크게 달라집니다.
+            </p>
+            <p>
+                **이사비용**을 결정하는 주요 요소는 크게 네 가지로 나뉩니다. 첫째, **운송 거리**입니다. 출발지와 도착지의 거리가 멀수록 유류비, 인건비, 통행료 등이 증가하여 **이사비**가 상승합니다. 둘째, **이사 날짜**입니다. '손 없는 날'이나 주말, 월말 등 이사 수요가 집중되는 시기에는 평일 비수기 대비 **이사비**가 20%에서 40%까지 급등할 수 있습니다. 셋째, **작업 환경**입니다. 사다리차 사용 여부, 엘리베이터 유무, 계단 작업 층수 등은 작업 인력과 시간, 장비 비용을 결정하며 이는 최종 **이사비용**에 직접적인 영향을 미칩니다. 넷째, **서비스 옵션**입니다. 에어컨 탈부착, 벽걸이 TV 설치, 피아노 운반 등 특수 작업이나 청소 서비스 추가 시 **이사비**가 추가됩니다.
+            </p>
+
+            <h3>이사 형태별 이사비 상세 비교 분석</h3>
+            <p>
+                고객 맞춤형 이사를 위해 제공되는 세 가지 주요 이사 형태인 **포장이사, 반포장이사, 일반이사**의 **이사비** 구조를 비교 분석하여 자신에게 가장 합리적인 **이사비용**을 선택할 수 있도록 돕겠습니다.
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>서비스 종류</th>
+                        <th>주요 제공 범위</th>
+                        <th>평균 이사비 (2026년 기준)</th>
+                        <th>적합 대상</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>포장이사비용</strong></td>
+                        <td>포장, 운반, 정리 정돈, 청소(부분) 일체</td>
+                        <td><span class="price-highlight">55만원 ~ 130만원</span></td>
+                        <td>시간 절약이 필요한 맞벌이 부부, 짐이 많은 3인 이상 가구</td>
+                    </tr>
+                    <tr>
+                        <td><strong>반포장이사비용</strong></td>
+                        <td>포장(업체), 운반, 큰 짐 정리(업체), 잔 짐 정리(고객)</td>
+                        <td><span class="price-highlight">45만원 ~ 90만원</span></td>
+                        <td>**이사비** 절감과 어느 정도의 시간 투자가 가능한 1~2인 가구</td>
+                    </tr>
+                    <tr>
+                        <td><strong>일반 이사비</strong></td>
+                        <td>운반(차량), 하역 작업(일부)만 업체 제공. 포장/정리는 고객 직접 진행.</td>
+                        <td><span class="price-highlight">30만원 ~ 60만원</span></td>
+                        <td>짐이 적거나, **이사비용** 최소화를 원하는 원룸/용달 이사 고객</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                이 표는 대략적인 **이사비**의 기준을 제시하며, 실제 **이사비용**은 견적 시 산정되는 정확한 짐의 양과 추가 서비스에 따라 변동될 수 있습니다. 특히 2026년에는 인건비 상승과 물가 상승의 영향으로 전반적인 **이사비**가 소폭 상승할 것으로 전망됩니다. 따라서 이사 계획이 있다면 최소 1~2개월 전에 미리 견적을 받고 예약하는 것이 **이사비**를 절약하는 현명한 방법입니다.
+            </p>
+        </section>
+
+        <section id="price_trend">
+            <h2>📈 2026년 이사비 트렌드 전망 및 절약 노하우</h2>
+            <p>
+                2026년 **이사비용** 트렌드를 분석하면, 스마트 이사 서비스의 도입과 친환경 포장재 사용 의무화 등으로 인해 서비스 품질은 향상되지만, 기본적인 **이사비**는 소폭 상승할 것으로 예상됩니다. 특히, 계절적 요인과 '손 없는 날' 같은 전통적 수요 집중일에는 **포장이사비용**이 더욱 민감하게 반응할 것입니다.
+            </p>
+            
+            <h3>2026년 주요 이사비 변동 요인</h3>
+            <ul>
+                <li><strong>인건비 상승 압력:</strong> 숙련된 이사 전문가의 인건비가 지속적으로 상승하여 **이사비** 전반에 영향을 미칩니다.</li>
+                <li><strong>최첨단 장비 도입:</strong> 무거운 짐을 안전하게 옮기는 최신 장비(리프팅 장치 등) 도입으로 인한 초기 투자 비용이 **이사비용**에 반영될 수 있습니다.</li>
+                <li><strong>물류 환경 변화:</strong> 유가 변동성 및 정부의 환경 규제 강화(경유차 규제 등)가 운송료 및 **이사비**의 일부를 구성합니다.</li>
+            </ul>
+
+            <div class="graph-placeholder" aria-label="2026년 이사 수요 및 이사비용 변동 그래프 시뮬레이션">
+                이사 수요와 이사비용 계절별 변동 예측 그래프 시뮬레이션 영역 (데이터 기반 시각화)
+            </div>
+            
+            <h3>합리적인 이사비 절약을 위한 5가지 노하우</h3>
+            <p>
+                현명한 고객이라면 다음 노하우를 통해 **이사비용**을 최소화할 수 있습니다.
+            </p>
+            <ul class="check-list">
+                <li><strong>이사 날짜 분산:</strong> 수요가 적은 평일(화, 수, 목)이나 비수기(11월~2월)를 이용하면 **이사비**를 크게 절약할 수 있습니다.</li>
+                <li><strong>불필요한 짐 최소화:</strong> 이사 전 짐의 양을 줄이는 것은 **이사비**를 줄이는 가장 확실한 방법입니다. 버릴 짐은 미리 처리하고, 중고로 판매할 짐은 분리하세요.</li>
+                <li><strong>방문 견적 필수:</strong> 전화 견적만으로는 정확한 **이사비용** 산출이 어렵습니다. 반드시 2~3곳의 업체로부터 방문 견적을 받아 비교하세요.</li>
+                <li><strong>반포장이사 고려:</strong> 짐이 적거나 시간이 허락한다면 **반포장이사비용**을 선택하여 포장이사 대비 **이사비**를 절감할 수 있습니다.</li>
+                <li><strong>옵션 서비스 명확히 협의:</strong> 추가 비용이 발생하는 옵션 서비스(에어컨, 벽걸이 TV 등)는 계약서에 정확히 명시하고 불필요한 비용을 최소화해야 합니다.</li>
+            </ul>
+        </section>
+
+        <section id="regions">
+            <h2>🗺️ 전국 주요 지역별 이사비 비교 및 지역 특화 정보</h2>
+            <p>
+                **이사비**는 지역별 물가와 인력 수급 상황에 따라 미세한 차이를 보입니다. 특히, 인구 밀집도가 높은 대도시와 광역시는 이사 업체 경쟁이 치열하여 비교적 합리적인 **이사비용**이 형성될 수 있지만, 도서 산간 지역은 운송비와 인력 투입의 어려움으로 **이사비**가 상승할 수 있습니다.
+            </p>
+            
+            <p>
+                **서울 이사비**, **부산 이사비**, **인천 이사비**, **대구 이사비**, **대전 이사비**, **광주 이사비**, **울산 이사비**, **세종 이사비** 등 주요 광역시의 **포장이사비용**은 비슷한 수준을 유지하고 있으나, **제주 이사비**나 **강원도 이사비**는 해상 운송 및 장거리 운반 비용이 추가되어 상승하는 경향이 있습니다. 다음은 전국 주요 지역별 **이사비용** 산정의 지역 특화 요소를 정리한 것입니다.
+            </p>
+
+            <h3>주요 지역별 이사비 특화 요인</h3>
+            <ul class="check-list">
+                <li><strong>수도권 (서울, 경기 이사비, 인천):</strong> 높은 인구 밀도로 인한 엘리베이터 사용 예약 경쟁 심화, 도심 진입 시간 제한, 주차 공간 부족 문제가 **이사비**에 반영됩니다.</li>
+                <li><strong>영남권 (부산, 대구, 울산, 경남, 경북):</strong> 특히 부산은 오르막길이나 좁은 골목길이 많아 사다리차 사용 또는 추가 인력 투입이 필요한 경우가 많아 **이사비용** 변동 폭이 큽니다.</li>
+                <li><strong>호남권 (광주, 전남, 전북):</strong> 장거리 이사가 많은 지역 특성상 운송 거리가 **이사비**의 큰 비중을 차지합니다. 신도시 지역은 작업 환경이 양호하여 **이사비** 절감 효과를 볼 수 있습니다.</li>
+                <li><strong>기타 주요 도시 (수원 이사비, 고양 이사비, 용인 이사비, 창원 이사비, 청주 이사비, 천안 이사비):</strong> 위성 도시의 특성상 짐의 규모(원룸, 2.5톤, 5톤)에 따른 **이사비** 구분이 명확하며, 주거 형태(아파트, 빌라, 주택)에 따른 **이사비용** 편차가 존재합니다.</li>
+                <li>**추가 확장 키워드**: 경기도 이사비용, 용인시 이사비용, 성남 이사비용, 화성 이사비용, 남양주 이사비용, 김포 이사비용, 파주 이사비용, 시흥 이사비용, 부천 이사비용, 안산 이사비용, 평택 이사비용, 안양 이사비용, 의정부 이사비용, 광명 이사비용, 충남 이사비용, 충북 이사비용, 전북 이사비용, 전남 이사비용, 경북 이사비용, 강릉 이사비용, 원주 이사비용, 순천 이사비용, 목포 이사비용, 포항 이사비용, 구미 이사비용, 진주 이사비용, 김해 이사비용, 양산 이사비용, 거제 이사비용. 이 모든 지역의 **이사비용** 견적을 저희 서비스를 통해 투명하게 비교하실 수 있습니다.</li>
+            </ul>
+        </section>
+        
+        <section id="simulation">
+            <h2>📊 이사비용 간편 시뮬레이션 및 견적 요청</h2>
+            <p>
+                나의 이사 조건에 따른 대략적인 **이사비용**을 예상해 보세요. 정확한 **이사비**는 방문 견적을 통해 확정됩니다. 이 시뮬레이션은 고객의 체류 시간을 늘리고 정확한 견적 문의를 유도하기 위한 핵심 도구입니다.
+            </p>
+            
+            <div class="simulation-form">
+                <form onsubmit="calculateCost(event)">
+                    <label for="moveType">이사 형태 (포장이사비용, 반포장이사비용 등)</label>
+                    <select id="moveType" required>
+                        <option value="package">포장이사 (프리미엄)</option>
+                        <option value="semi">반포장이사 (가성비)</option>
+                        <option value="general">일반 이사 (운송만)</option>
+                    </select>
+
+                    <label for="tonnage">짐의 양 (차량 톤수 기준)</label>
+                    <select id="tonnage" required>
+                        <option value="2.5">2.5톤 (원룸, 1.5룸, 작은 투룸)</option>
+                        <option value="1">1톤 (원룸 미니)</option>
+                        <option value="5">5톤 (30평대 아파트)</option>
+                    </select>
+
+                    <label for="moveDistance">운송 거리 (출발지/도착지 시/도)</label>
+                    <select id="moveDistance" required>
+                        <option value="short">단거리 (동일 시/구)</option>
+                        <option value="mid">중거리 (인접 시/도)</option>
+                        <option value="long">장거리 (전국)</option>
+                    </select>
+                    
+                    <label for="floorLevel">출발지/도착지 작업 층수 및 환경</label>
+                    <select id="floorLevel" required>
+                        <option value="easy">엘리베이터 또는 저층 사다리</option>
+                        <option value="medium">5층 이상 계단 또는 고층 사다리</option>
+                    </select>
+                    
+                    <label for="moveDate">이사 예정일 (성수기/비수기 고려)</label>
+                    <input type="date" id="moveDate" required>
+
+                    <button type="submit">이사비용 예상 견적 산출</button>
+                </form>
+                <div id="simulationResult">
+                    **이사비용** 예상 결과가 여기에 표시됩니다. (정확한 **이사비**는 방문 견적을 받으세요.)
+                </div>
+            </div>
+            
+            <script>
+                function calculateCost(e) {
+                    e.preventDefault();
+                    
+                    const type = document.getElementById('moveType').value;
+                    const ton = document.getElementById('tonnage').value;
+                    const dist = document.getElementById('moveDistance').value;
+                    const floor = document.getElementById('floorLevel').value;
+                    const date = new Date(document.getElementById('moveDate').value);
+                    const month = date.getMonth() + 1;
+                    
+                    // 기본 이사비 (2.5톤 반포장, 단거리, 평일 기준)
+                    let baseCost = 400000; 
+
+                    // 이사 형태별 가중치
+                    if (type === 'package') baseCost *= 1.35; // 포장이사비용 가중치
+                    else if (type === 'general') baseCost *= 0.75; // 일반 이사비 가중치
+                    
+                    // 톤수별 가중치 (2.5톤 기준)
+                    if (ton === '1') baseCost *= 0.6;
+                    else if (ton === '5') baseCost *= 1.8;
+                    
+                    // 거리별 가중치
+                    if (dist === 'mid') baseCost *= 1.15;
+                    else if (dist === 'long') baseCost *= 1.4;
+
+                    // 환경별 가중치
+                    if (floor === 'medium') baseCost *= 1.15;
+                    
+                    // 성수기(3, 4, 5, 10월) 및 주말 가중치
+                    if ([3, 4, 5, 10].includes(month)) {
+                        baseCost *= 1.1; // 성수기
+                    }
+                    if (date.getDay() === 0 || date.getDay() === 6) {
+                        baseCost *= 1.05; // 주말
+                    }
+                    
+                    const finalCost = Math.round(baseCost / 10000) * 10000;
+                    document.getElementById('simulationResult').innerHTML = `
+                        <strong>✅ 고객님의 예상 이사비용: </strong> <span class="price-highlight">${finalCost.toLocaleString('ko-KR')}원 ~</span>
+                        <br> (VAT 별도. 이 금액은 변동될 수 있으므로, 정확한 **이사비**는 상담 후 확정됩니다.)
+                    `;
+                }
+            </script>
+        </section>
+
+
+        <section id="faq">
+            <h2>❓ 자주 묻는 이사비 및 이사 관련 질문 (Q&A)</h2>
+            <p>
+                많은 고객들이 궁금해하는 **이사비**와 서비스 관련 질문들을 정리했습니다. 이 정보는 **네이버 스니펫** 노출을 위한 정보의 깊이와 구조를 제공합니다.
+            </p>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">Q. 2026년 포장이사비용이 작년 대비 얼마나 상승할까요?</dt>
+                <dd>2026년 **포장이사비용**은 전년 대비 약 5% 내외의 상승이 예상됩니다. 이는 주로 숙련된 이사 전문가의 인건비 상승과 안전 및 보험료 강화 정책에 따른 것입니다. 특히, 명절 전후나 '손 없는 날'과 같은 극성수기에는 **이사비** 상승 폭이 더 커질 수 있으므로, 이 시기를 피하거나 최소 3개월 전에 예약하는 것이 좋습니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">Q. 이사비용을 절감하기 위해 용달 이사 또는 일반 이사를 선택해도 괜찮을까요?</dt>
+                <dd>단순히 **이사비용** 절감이 목표라면 짐이 적은 경우 (원룸, 오피스텔) 용달 이사나 일반 이사가 좋은 대안입니다. 하지만 일반 이사는 고객이 모든 포장과 정리 작업을 직접 해야 하므로, 체력 소모가 크고 물품 파손 위험이 높습니다. 짐이 중간 정도(2.5톤)라면 **반포장이사비용**을 선택하는 것이 가장 합리적인 **이사비**와 노동력 절감의 균형점입니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">Q. 이사 도중 물품 파손 시 이사비에 포함된 보험 보상은 어떻게 되나요?</dt>
+                <dd>화물자동차 운수사업법에 따라 모든 정식 이사 업체는 **적재물배상책임보험**에 의무적으로 가입되어 있습니다. 파손 또는 분실 사고 발생 시, 현장에서 즉시 담당 직원에게 알려야 하며, 이사 종료 후에는 늦어도 14일 이내에 보험사에 통보하여 보상 절차를 진행할 수 있습니다. 계약 시 **이사비**에 포함된 보험 약관의 보상 한도와 범위를 반드시 확인해야 합니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">Q. 2.5톤 이사비용이 필요한 짐의 양은 어느 정도인가요?</dt>
+                <dd>**2.5톤이사비용**은 보통 짐의 양이 5톤 차량으로 옮기기에는 부족하고 1톤 차량으로는 한참 모자라는 경우에 적합합니다. 대표적으로 1인 가구의 짐이 매우 많거나, 일반적인 2인 가구(투룸 또는 소형 아파트)의 짐에 해당합니다. 주요 가구로는 침대, 4인용 소파, 냉장고, 세탁기 등이 포함되며, 정확한 **이사비** 산출을 위해선 반드시 방문 견적을 통해 짐의 부피를 측정해야 합니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">Q. 견적 받은 이사비 외에 추가 비용이 발생할 수 있나요?</dt>
+                <dd>견적 확정 후 추가 비용이 발생하는 것을 방지하기 위해 반드시 **서면 계약**을 해야 합니다. 주요 추가 **이사비용** 발생 요인은 당일 짐의 양 증가, 사다리차 이용 시간 초과, 주차 불가능 지역으로 인한 운반 거리 증가, 그리고 에어컨, 비데 등 옵션 작업의 미고지 등이 있습니다. **이사비** 계약 시 '추가 비용 발생 조건'을 명확히 명시하는 것이 중요합니다.</dd>
+            </dl>
+        </section>
+
+        <section class="external-links">
+            <h2>🔗 이사비 및 서비스 관련 공인된 외부 신뢰 사이트</h2>
+            <p>
+                **이사비용**과 관련된 분쟁 예방 및 공정한 정보를 얻기 위해 공신력 있는 기관의 정보를 확인하세요.
+            </p>
+            <ul>
+                <li><a href="https://www.ftc.go.kr/www/cpw/service/selectBusi.do?key=670&busiType=08" target="_blank">공정거래위원회 이사화물 표준약관 확인 (분쟁 예방)</a></li>
+                <li><a href="https://www.molit.go.kr/USR/policyData/m_27066/dtl.jsp?id=607" target="_blank">국토교통부 이사화물 운송 주선업 관련 법규</a></li>
+                <li><a href="https://namu.wiki/w/%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC" target="_blank">포장이사 및 **이사비용** 결정 요인 나무위키 정보</a></li>
+                <li><a href="https://www.consumer.go.kr/contents/30601/view.do" target="_blank">한국소비자원 이사 서비스 관련 소비자 주의사항</a></li>
+                <li><a href="https://www.kostat.go.kr/portal/korea/kor_nw/2/1/index.board?bmode=read&aSeq=408828" target="_blank">통계청 주거비 및 물가 변동 추이 (이사비용 간접 정보)</a></li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>📞 지금 바로 2026년 최적화된 이사비 무료 견적 받기</h2>
+            <p>
+                정확한 **이사비**는 현장 견적을 통해서만 가능합니다. 고객님의 이사 환경과 짐의 양을 고려한 가장 합리적인 **포장이사비용** 또는 **반포장이사비용**을 지금 바로 확인해 보세요. 전문 컨설턴트가 친절하게 상담해 드립니다.
+            </p>
+            <div class="simulation-form">
+                <label for="contactName">성함</label>
+                <input type="text" id="contactName" placeholder="고객님의 성함을 입력하세요" required>
+                
+                <label for="contactPhone">연락처</label>
+                <input type="tel" id="contactPhone" placeholder="예: 010-1234-5678" required>
+                
+                <label for="moveRegion">이사 예정 지역 (출발지)</label>
+                <input type="text" id="moveRegion" placeholder="예: 서울 강남구, 부산 해운대구 등" required>
+
+                <label for="moveDetail">이사 요청 상세 내용 (짐의 양, 특이사항 등)</label>
+                <textarea id="moveDetail" rows="5" placeholder="이사비용 산정을 위한 자세한 정보를 입력해주세요. 예: 2.5톤 추정, 에어컨 1대 포함, 엘리베이터 유무 등"></textarea>
+                
+                <button type="submit" class="cta-button" aria-label="무료 견적 전화 상담 신청">전화로 바로 이사비 견적 상담 신청 📞</button>
+            </div>
+            
+            <p style="text-align: center; margin-top: 2rem;">
+                <strong>전화 문의:</strong> <a href="tel:01012345678" style="color: #e74c3c; font-size: 1.5rem; text-decoration: none;">010-1234-5678</a>
+            </p>
+        </section>
+
+        <div class="hidden-seo-text">
+            이 글은 2026년 **이사비**에 대한 종합적인 정보를 제공하며, **포장이사비용**, **반포장이사비용**, **2.5톤이사비용** 등 고객이 궁금해하는 모든 **이사비용** 관련 키워드를 다루고 있습니다. 특히, **서울이사비**, **경기이사비**, **부산이사비** 등 전국 주요 지역별 **이사비용**의 미세한 차이까지 분석하여 고객님의 **이사비** 예산을 최적화할 수 있도록 돕습니다. 정확한 **이사비** 산출은 경험 많은 전문가와의 상담이 필수입니다. **이사비**에 대한 오해를 풀고, 투명하고 합리적인 **이사비용**으로 만족스러운 이사를 경험하세요. 저희는 **이사비**에 대한 고객의 부담을 덜어드리기 위해 끊임없이 노력합니다.
+        </div>
     </main>
-  </body>
-</html>
+
+    <footer>
+        <p>&copy; 2026 이사비 전문가 그룹. 합리적인 **이사비용**으로 고객 만족을 최우선합니다. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // FAQ 아코디언 기능 (접기/펼치기)
+        document.querySelectorAll('dl dt').forEach((dt) => {
+            dt.addEventListener('click', () => {
+                const dd = dt.nextElementSibling;
+                const isExpanded = dt.getAttribute('aria-expanded') === 'true';
+
+                // 다른 FAQ 닫기
+                document.querySelectorAll('dl dt').forEach(item => {
+                    item.setAttribute('aria-expanded', 'false');
+                    if (item.nextElementSibling) {
+                        item.nextElementSibling.style.display = 'none';
+                    }
+                });
+
+                // 현재 FAQ 열기/닫기
+                if (!isExpanded) {
+                    dt.setAttribute('aria-expanded', 'true');
+                    dd.style.display = 'block';
+                }
+            });
+            
+            // 키보드 접근성 처리
+            dt.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dt.click();
+                }
+            });
+        });
+    </script>
+</body>
+
+
+  
